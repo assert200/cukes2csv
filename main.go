@@ -7,10 +7,16 @@ import (
 	"path/filepath"
 	"log"
 	"io/ioutil"
+	"flag"
 )
 
+var featuresDir = flag.String("features", "./features", "Features directory")
+
 func main() {
-	featureDirPattern := "features/*.feature"
+	flag.Parse()
+
+	featureDirPattern := filepath.Join(*featuresDir,"*.feature")
+
 	featureFilenames, err := filepath.Glob(featureDirPattern)
 	if err != nil {
 		log.Println(err)
